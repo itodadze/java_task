@@ -22,7 +22,16 @@ public class Task {
     }
 
     public static int numberOfHappyStrings(List<String> strings) {
-        return 0;
+        int result = strings.size();
+        for (String current: strings) {
+            for (int i = 1; i < current.length(); i++) {
+                if (current.charAt(i) == current.charAt(i - 1)) {
+                    result -= 1;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     public static ListNode reverseList(ListNode head) {
