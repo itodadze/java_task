@@ -35,7 +35,14 @@ public class Task {
     }
 
     public static ListNode reverseList(ListNode head) {
-        return null;
+        ListNode tracker = head;
+        ListNode reversedHead = new ListNode(null, tracker.value());
+        while (tracker.next() != null) {
+            tracker = tracker.next();
+            ListNode newHead = new ListNode(reversedHead, tracker.value());;
+            reversedHead = newHead;
+        }
+        return reversedHead;
     }
 
     public static int[] findIntersection(int[] nums1, int[] nums2) {
