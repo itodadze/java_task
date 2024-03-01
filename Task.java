@@ -39,8 +39,7 @@ public class Task {
         ListNode reversedHead = new ListNode(null, tracker.value());
         while (tracker.next() != null) {
             tracker = tracker.next();
-            ListNode newHead = new ListNode(reversedHead, tracker.value());;
-            reversedHead = newHead;
+            reversedHead = new ListNode(reversedHead, tracker.value());
         }
         return reversedHead;
     }
