@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -45,7 +47,31 @@ public class Task {
     }
 
     public static int[] findIntersection(int[] nums1, int[] nums2) {
-        return null;
+        /* It's unclear from the instruction and the example whether nums1 and
+        nums2 are sorted arrays. So, I added Arrays.sort in case they are
+        unsorted. These sorts cause the solution to be O(n*logn) in time complexity,
+        so, keep in mind that I would avoid it if I knew for sure the arrays
+        are sorted. There is also a fast solution even without sorts using maps;
+        however, maps add the space complexity of O(n) so I wrote the solution
+        using two pointers algorithm.
+         */
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        List<Integer> result = new ArrayList<>();
+        int left = 0;
+        int right = 0;
+        while (left < nums1.length && right < nums2.length) {
+            if (nums1[left] == nums2[right]) {
+                result.add(nums1[left]);
+                left++;
+                right++;
+            } else if (nums1[left] < nums2[right]) {
+                left++;
+            } else {
+                right++;
+            }
+        }
+        return result.stream().mapToInt(i->i).toArray();
     }
 
     public static int lenOfLongSubarr(int[] array, int k) {
