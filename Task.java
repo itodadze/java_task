@@ -5,6 +5,8 @@ import java.util.StringTokenizer;
 
 public class Task {
 
+    private static final int SUBARRAY_NULL = -999;
+
     public record ListNode(Task.ListNode next, int value) {
     }
 
@@ -75,11 +77,33 @@ public class Task {
     }
 
     public static int lenOfLongSubarr(int[] array, int k) {
-        return 0;
+        /* Since it is not specified in the instruction, I decided to simply return
+        a negative number if the subarray is not even found. I also assumed that
+        negative numbers may be included, so I did not optimize for non-negative numbers.
+         */
+        return Math.max(subarrayHelper(array, 0, array.length - 1, k), -1);
     }
 
     public static boolean isValidSubsequence(int[] array, int[] sequence) {
         return false;
+    }
+
+    private static int subarrayHelper(int[] array, int start, int end, int k) {
+        if (start > end) {
+            if (k == 0) {
+                return 0;
+            } else {
+                return SUBARRAY_NULL;
+            }
+        }
+        int withCurrent = 1 + subarrayHelper(array, start + 1, end, k - array[start]);
+        int withoutCurrent = subarrayHelper(array, start + 1, end, k);
+        int result = Math.max(withCurrent, withoutCurrent);
+        if (result < 0) {
+            return SUBARRAY_NULL;
+        } else {
+            return result;
+        }
     }
 
 }
