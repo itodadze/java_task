@@ -85,7 +85,16 @@ public class Task {
     }
 
     public static boolean isValidSubsequence(int[] array, int[] sequence) {
-        return false;
+        int current = 0;
+        for (int num: array) {
+            if (current >= sequence.length) {
+                break;
+            }
+            if (num == sequence[current]) {
+                current++;
+            }
+        }
+        return current >= sequence.length;
     }
 
     private static int subarrayHelper(int[] array, int start, int end, int k) {
