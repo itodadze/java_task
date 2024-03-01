@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class Task {
 
@@ -6,7 +7,18 @@ public class Task {
     }
 
     public static int evaluateExpression(String expression) {
-        return 0;
+        int result = 0;
+        StringTokenizer byAddition = new StringTokenizer(expression, "+");
+        while (byAddition.hasMoreTokens()) {
+            StringTokenizer bySubtraction = new StringTokenizer(byAddition.nextToken(), "-");
+            if (bySubtraction.hasMoreTokens()) {
+                result += Integer.parseInt(bySubtraction.nextToken());
+            }
+            while (bySubtraction.hasMoreTokens()) {
+                result -= Integer.parseInt(bySubtraction.nextToken());
+            }
+        }
+        return result;
     }
 
     public static int numberOfHappyStrings(List<String> strings) {
